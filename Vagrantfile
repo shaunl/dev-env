@@ -5,7 +5,10 @@ Vagrant.configure("2") do |config|
 
     config.vm.network :private_network, ip: "192.168.33.101"
 
-    config.vm.synced_folder "../dev-env/", "/var/www/dev-env/", id: "vagrant-root"
+    config.vm.synced_folder "../dev-env/", "/var/www/dev-env/", id: "vagrant-root",
+	owner: "vagrant",
+    	group: "www-data",
+    	mount_options: ["dmode=775,fmode=664"]
 
     config.vm.provision :puppet do |puppet|
         puppet.manifests_path = "puppet/manifests"

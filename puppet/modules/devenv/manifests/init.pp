@@ -9,5 +9,11 @@ class devenv(
     service => 'nginx'
   }
 
+  class { 'nginx': }
+
+  nginx::resource::vhost { 'www.devenv.com':
+    www_root => '/var/www/dev-env',
+  }
+
   php::module { $php_modules: }
 }
