@@ -12,7 +12,25 @@ class devenv(
   class { 'nginx': }
 
   nginx::resource::vhost { 'www.devenv.com':
-    www_root => '/var/www/dev-env',
+    www_root  => '/var/www/dev-env',
+  }
+
+  nginx::resource::location { '/':
+    ensure          => present,
+    vhost           => 'www.devenv.com',
+    www_root        => '/var/www/dev-env',
+    location        => '~ \.php$',
+    index_files     => ['index.php', 'index.html', 'index.htm'],
+    proxy           => undef,
+    fastcgi         => 'unix:/var/run/php5-fpm.sock;',
+    fastcgi_script  => undef,
+    location_cfg_append => {
+      fastcgi_connect_timeout => '3m',
+      fastcgi_read_timeout    => '3m',
+      fastcgi_send_timeout    => '3m',
+      fastcgi_index           => 'index.php'
+    },
+    fastcgi_params  => '/etc/nginx/fastcgi_params'
   }
 
   php::module { $php_modules: }
