@@ -12,7 +12,10 @@ class devenv(
   class { 'nginx': }
 
   nginx::resource::vhost { 'www.devenv.com':
-    www_root  => '/var/www/dev-env',
+    ensure      => 'present',
+    www_root    => '/var/www/dev-env',
+    ipv6_enable =>  true,
+    index_files     => ['index.php', 'index.html', 'index.htm']
   }
 
   nginx::resource::location { '/':
@@ -20,9 +23,8 @@ class devenv(
     vhost           => 'www.devenv.com',
     www_root        => '/var/www/dev-env',
     location        => '~ \.php$',
-    index_files     => ['index.php', 'index.html', 'index.htm'],
     proxy           => undef,
-    fastcgi         => 'unix:/var/run/php5-fpm.sock;',
+    fastcgi         => 'unix:/var/run/php5-fpm.sock',
     fastcgi_script  => undef,
     location_cfg_append => {
       fastcgi_connect_timeout => '3m',
@@ -34,4 +36,6 @@ class devenv(
   }
 
   php::module { $php_modules: }
+
+  class {'git': }
 }
