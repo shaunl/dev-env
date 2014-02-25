@@ -22,3 +22,9 @@ Before using this you must have Vagrant and Virtualbox running!!
 ####Known Issues####
 
  - On first provisioning Nginx sometimes won't start as port 80 is blocked, `vagrant halt` then `vagrant up` for fix
+ 
+ ###TODO###
+ 
+  - Install MySql
+  - Install Redis
+  - Install Varnish and modify vhost for proxy port
