@@ -19,3 +19,6 @@
 [submodule "puppet/modules/git"]
 	path = puppet/modules/git
 	url = https://github.com/puppetlabs/puppetlabs-git.git
+[submodule "puppet/modules/redis"]
+	path = puppet/modules/redis
+	url = https://github.com/thomasvandoren/puppet-redis.git
