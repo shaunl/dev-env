@@ -1,5 +1,5 @@
 class devenv(
-  $php_modules     = ['fpm', 'xdebug', 'curl', 'mysql', 'cli','mcrypt']
+$php_modules     = ['fpm', 'xdebug', 'curl', 'mysql', 'cli','mcrypt']
 ){
   class { 'apt':
     always_apt_update => false,
@@ -15,7 +15,8 @@ class devenv(
     ensure      => 'present',
     www_root    => '/var/www/dev-env',
     ipv6_enable =>  true,
-    index_files     => ['index.php', 'index.html', 'index.htm']
+    index_files => ['index.php', 'index.html', 'index.htm'],
+    listen_port => '8080'
   }
 
   nginx::resource::location { '/':
@@ -38,4 +39,13 @@ class devenv(
   php::module { $php_modules: }
 
   class {'git': }
+
+  class { 'redis':
+    version => '2.6.5',
+  }
+
+  class {'varnish':
+    varnish_listen_port => 80,
+    varnish_storage_size => '32M',
+  }
 }
