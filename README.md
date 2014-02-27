@@ -10,6 +10,8 @@ Currently provisioning:
  - Nginx with vhost entry for www.devenv.com
  - PHP with packages: FPM, Xdebug, Curl, MySql, Cli, MCrypt
  - Git
+ - Redis v2.6.5
+ - Varnish installed but not yet configured
 
 ###Installation###
 
@@ -26,4 +28,4 @@ Before using this you must have Vagrant and Virtualbox running!!
 ###TODO###
 
  - Install MySql
- - Install Varnish and modify vhost for proxy port
+ - Configure Varnish
