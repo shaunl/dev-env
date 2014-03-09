@@ -27,5 +27,6 @@ Before using this you must have Vagrant and Virtualbox running!!
  
 ###TODO###
 
- - Install MySql
+ - Configure MySql
  - Configure Varnish
+ - Add phpunit and phpmyadmin through composer global install
