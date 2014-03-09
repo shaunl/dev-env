@@ -57,7 +57,6 @@ $php_modules     = ['fpm', 'xdebug', 'curl', 'mysql', 'cli','mcrypt']
   class { 'composer':
     require => [
       Class[ 'php' ]
-     # Package[ 'curl' ]
     ]
   }
 }
