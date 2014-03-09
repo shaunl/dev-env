@@ -38,9 +38,12 @@ $php_modules     = ['fpm', 'xdebug', 'curl', 'mysql', 'cli','mcrypt']
 
   php::module { $php_modules: }
 
-  class {'git': }
+  class { '::mysql::server':
+    root_password    => 'vagrant',
+    override_options => { 'mysqld' => { 'max_connections' => '1024' } }
+  }
 
-  class { 'redis':
+    class { 'redis':
     version => '2.6.5',
   }
 
@@ -48,4 +51,6 @@ $php_modules     = ['fpm', 'xdebug', 'curl', 'mysql', 'cli','mcrypt']
     varnish_listen_port => 80,
     varnish_storage_size => '32M',
   }
+
+  class {'git': }
 }
